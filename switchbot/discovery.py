@@ -120,7 +120,9 @@ class GetSwitchbotDevices:
 
     async def get_locks(self) -> dict[str, SwitchBotAdvertisement]:
         """Return all WoLock/Locks devices with services data."""
-        return await self._get_devices_by_model("o")
+        locks = await self._get_devices_by_model("o")
+        pro_locks = await self._get_devices_by_model("$")
+        return {**locks, **pro_locks}
 
     async def get_device_data(
         self, address: str
